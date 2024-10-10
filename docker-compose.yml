@@ -57,7 +57,11 @@ services:
 
       ADMIN_EMAIL: "admin@example.com"
       ADMIN_PASSWORD: "d1r3ctu5"
-      CORS_ENABLED: "true"
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: '*'
+      CORS_METHODS: 'GET,POST,PATCH,DELETE'
+      CORS_ALLOWED_HEADERS: 'Content-Type,Authorization'
+      CORS_EXPOSED_HEADERS: 'Content-Range'
 
       # Make sure to set this in production
       # (see https://docs.directus.io/self-hosted/config-options#general)
