@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import Profile from "./Profile";
+import ExpEdu from "./ExpEdu";
+import "./App.css";
+import Information from "./Information";
+import { useEffect, useState } from "react";
+
+const api_token = 'McyHJahHWO1LHcTXxgq_vwRpsVGctX9h';
+const base_url = 'http://localhost:8055/items/users'
 
 function App() {
+  const [user, setUser] = useState({
+    "name": "David",
+    "surname": "Chincharashvili",
+    "profession": "It Specialist",
+  }); 
+
+  // useEffect(() => {
+  //   fetch(base_url, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Authorization': `Bearer ${api_token}`
+  //     }
+  //   }).then(response => response.json())
+  //     .then(data => console.log(data))
+  // })
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="flexbox">
+        <div>
+          <Profile {...user} />
+          <Information />
+        </div>
+
+        <div>
+          <ExpEdu />
+        </div>
+      </div>
     </div>
   );
 }
