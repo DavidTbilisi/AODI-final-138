@@ -30,12 +30,12 @@ function App() {
   return (
     <div className="container">
       <div className="flexbox">
-        <div>
+        <div id="left-col">
           <Profile {...user} />
           <Information />
         </div>
 
-        <div>
+        <div id="right-col">
           <ExpEdu />
         </div>
       </div>
