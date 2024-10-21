@@ -1,38 +1,32 @@
+import "./App.css";
+
 import Profile from "./components/Profile";
 import ExpEdu from "./components/ExpEdu";
-import "./App.css";
 import Information from "./components/Information";
-import { useEffect, useState } from "react";
 
-const api_token = "ikfRi0pb6C3E9AugagcXj4ySxjbE3Muw";
-const base_url = "http://localhost:8055/items/users";
+import { useSelector, useDispatch } from "react-redux";
+import { getUser } from "./cvReducer";
+import { useEffect } from "react";
 
 function App() {
-  const [user, setUser] = useState({
-    name: "David",
-    surname: "Chincharashvili",
-    profession: "It Specialist",
-  });
+  const data = useSelector((state) => state.cv.data);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(base_url + "?filter[name][_eq]=David", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${api_token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUser(data.data[0]);
-      });
-  }, []);
+    dispatch(getUser());
+  }, [dispatch]);
+
+  console.log(data);
+  if (!data || data.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container">
       <div className="flexbox">
         <div id="left-col">
-          <Profile {...user} />
-          <Information />
+          <Profile {...data[0]} />
+          <Information {...data[0]} />
         </div>
 
         <div id="right-col">

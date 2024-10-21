@@ -1,7 +1,16 @@
 
 function Info({ icon = '', text = '', list_tilte = '', list = [] }) {
+
+    {/* if no data return  */}
+    if (!icon && !text && !list_tilte && Object.keys(list).length === 0) {
+        return null;
+    }
+
+
     return (
         <div>
+
+            
             {icon && <span className="material-symbols-outlined">{icon}</span>}
             {text && <span>{text}</span>}
             {list_tilte && <h3>{list_tilte}</h3>}
