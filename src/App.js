@@ -1,38 +1,19 @@
 import "./App.css";
 
-import Profile from "./components/Profile";
-import ExpEdu from "./components/ExpEdu";
-import Information from "./components/Information";
 
-import { useSelector, useDispatch } from "react-redux";
-import { getUser } from "./cvReducer";
-import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import NotFound from "./components/NotFound";
+import Edit from "./components/Edit";
 
 function App() {
-  const data = useSelector((state) => state.cv.data);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
-
-  console.log(data);
-  if (!data || data.length === 0) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="container">
-      <div className="flexbox">
-        <div id="left-col">
-          <Profile {...data[0]} />
-          <Information {...data[0]} />
-        </div>
-
-        <div id="right-col">
-          <ExpEdu />
-        </div>
-      </div>
+      <Routes>
+        <Route path="/:user" element={<Home />} />
+        <Route path="/:user/edit" element={<Edit />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }

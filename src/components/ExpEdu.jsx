@@ -3,7 +3,7 @@ import { getEducation } from "../cvReducer";
 import { useEffect } from "react";
 
 function ExpEdu() {
-    const data = useSelector((state) => state.cv.data);
+    const data = useSelector((state) => state.cv.data.education);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,6 +14,7 @@ function ExpEdu() {
     if (!data) {
         return null;
     }
+
     return (    
         <div className="Education">
             <h2 className="edu-title">EDUCATION</h2>
@@ -28,7 +29,6 @@ function ExpEdu() {
                         </div>
                     </div>
                 ))}
-
             
             </div>
         </div>

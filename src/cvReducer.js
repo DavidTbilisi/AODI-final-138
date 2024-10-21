@@ -4,11 +4,22 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getUser = createAsyncThunk(
     'cv/getUser',
-    async () => {
-        const response = await useAPI("users");
+    async (user) => {
+        const response = await useAPI("users", user);
         return response;
     }
 );
+
+export const setUser = createAsyncThunk(
+    'cv/setUser',
+    async (data) => {
+        console.log("Setting user: ", data);
+        const response = await useAPI("users", "", "POST", data);
+        console.log("Response: ", response);
+        return response;
+    }
+);
+
 
 export const getIndustry = createAsyncThunk(
     'cv/getIndustry',
@@ -30,18 +41,23 @@ export const getEducation = createAsyncThunk(
 export const cvSlice = createSlice({
     name: 'cv',
     initialState: {
-        data: [{}]
+        data: {user: {}, education: [], industry: [], }
     },
-    reducers: {}, 
+    reducers: {
+    }, 
     extraReducers: (builder) => {
         builder.addCase(getUser.fulfilled, (state, action) => {
-            state.data = action.payload;
+            state.data.user = action.payload[0];
         });
         builder.addCase(getIndustry.fulfilled, (state, action) => {
-            state.data = action.payload;
+            state.data.industry = action.payload;
         });
         builder.addCase(getEducation.fulfilled, (state, action) => {
-            state.data = action.payload;
+            state.data.education = action.payload;
+        });
+        builder.addCase(setUser.fulfilled, (state, action) => {
+            console.log("Setting user from reducer: ", action.payload);
+            state.data.user = action.payload;
         });
     }
 });

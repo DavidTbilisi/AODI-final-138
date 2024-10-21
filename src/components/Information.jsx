@@ -1,12 +1,17 @@
+import { useEffect } from "react";
 import Info from "./Info";
-import useAPI from "../hooks/useAPI";
+import { getIndustry } from "../cvReducer";
+import { useSelector, useDispatch } from "react-redux";
 
-function Information({phone, email, address}) {
+function Information(info) {
     const list_title = 'Industry Knowledge';
+    const data = useSelector((state) => state.cv.data.industry);
+    const dispatch = useDispatch();
 
-    const { data } = useAPI("industry");
-    
-    const info = {phone, email, address};
+    useEffect(() => {
+        dispatch(getIndustry());
+    }, [dispatch]);
+    const {phone, email, address} = info;
     
     if (!phone && !email && !address) {
         return null;
@@ -14,8 +19,10 @@ function Information({phone, email, address}) {
 
     return (
         <>
-            {/* {Object.keys(info).map(key => <Info key={key} text={info[key]} />)}
-            <Info list_tilte={list_title} list={data} /> */}
+            <Info text={phone} />
+            <Info text={email} />
+            <Info text={address} />
+            <Info list_tilte={list_title} list={data} />
         </>
     )
 }
