@@ -1,7 +1,6 @@
 
 function Info({ icon = '', text = '', list_tilte = '', list = [] }) {
 
-    {/* if no data return  */}
     if (!icon && !text && !list_tilte && Object.keys(list).length === 0) {
         return null;
     }

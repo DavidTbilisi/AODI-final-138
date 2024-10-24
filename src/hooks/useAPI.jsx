@@ -1,5 +1,5 @@
-function useAPI(table,  filter_key = "", method = "GET", data = {}) {
-    const api_token = "a9sBjpY_Ot21kMmJMM9QwBhMc8kN_sqy";
+function useAPI(table, filter_key = "", method = "GET", data = {}) {
+    const api_token = "DEc7UL2_s3lGZO3T__GnFziBxCNTZJtP";
     const base_url = "http://localhost:8055/items";
 
     if (filter_key === "") {
@@ -9,11 +9,11 @@ function useAPI(table,  filter_key = "", method = "GET", data = {}) {
                 Authorization: `Bearer ${api_token}`,
             }
         })
-        .then(response => response.json())
-        .then(data => data.data);
+            .then(response => response.json())
+            .then(data => data.data);
     }
 
-    if (method === "POST") {
+    if (method === "PATCH") {
         return fetch(`${base_url}/${table}`, {
             method: method,
             headers: {
@@ -22,8 +22,8 @@ function useAPI(table,  filter_key = "", method = "GET", data = {}) {
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .then(data => console.log(data));
+            .then(response => response.json())
+            .then(data => console.log(data));
     }
 
     return fetch(`${base_url}/${table}?filter[username][_eq]=${filter_key}`, {
@@ -32,8 +32,8 @@ function useAPI(table,  filter_key = "", method = "GET", data = {}) {
             Authorization: `Bearer ${api_token}`,
         }
     })
-    .then(response => response.json())
-    .then(data => data.data);
+        .then(response => response.json())
+        .then(data => data.data);
 }
 
 

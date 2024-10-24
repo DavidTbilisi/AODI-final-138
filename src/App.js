@@ -1,6 +1,5 @@
 import "./App.css";
 
-
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
@@ -10,6 +9,7 @@ function App() {
   return (
     <div className="container">
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/:user" element={<Home />} />
         <Route path="/:user/edit" element={<Edit />} />
         <Route path="*" element={<NotFound />} />

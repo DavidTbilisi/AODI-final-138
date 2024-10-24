@@ -7,6 +7,7 @@ function Edit() {
     let { user } = useParams();
     const data = useSelector((state) => state.cv.data.user);
     const [data2, setData2] = useState({
+        id: '',
         name: '',
         surname: '',
         email: '',
@@ -23,6 +24,7 @@ function Edit() {
     useEffect(() => {
         if (data) {
             setData2({
+                id: data.id || '', // Fallback to an empty string if undefined
                 name: data.name || '', // Fallback to an empty string if undefined
                 surname: data.surname || '',
                 email: data.email || '',
@@ -43,14 +45,12 @@ function Edit() {
         dispatch(setUser(data2));
     }
 
-    if (!data.name) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <>
             <h1>Edit {user} CV page</h1>
             <form className="form-container" onSubmit={handleSubmit}>
+                <input type="hidden" name="id" value={data2.id || ''} />
                 <label htmlFor="name">Name</label>
                 <input
                     type="text"
